@@ -48,8 +48,8 @@
 						"properties": null
 					},
 					{
-						"name": "list ",
-						"definition": "list ",
+						"name": "list contents",
+						"definition": "list contents",
 						"command": "ls -R\n",
 						"properties": null
 					}
