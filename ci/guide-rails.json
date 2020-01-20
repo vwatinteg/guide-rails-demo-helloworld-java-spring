@@ -529,6 +529,11 @@
 				"name": "warden.centos.release.build",
 				"value": "true",
 				"type": "boolean"
+			},
+			{
+				"name": "jdk.version",
+				"value": "12",
+				"type": "string"
 			}
 		],
 		"deployment_files": [
