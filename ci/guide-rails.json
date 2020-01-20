@@ -171,6 +171,12 @@
 						}
 					}
 				},
+				"properties": [
+					{
+						"name": "consul.servicename",
+						"value": "((application.name))-INT"
+					}
+				],
 				"deployment_strategy": {
 					"canaries": 1,
 					"max_in_flight": 1,
@@ -313,6 +319,12 @@
 						"delete_instances": false
 					}
 				},
+				"properties": [
+					{
+						"name": "consul.servicename",
+						"value": "((application.name))-REL"
+					}
+				],
 				"deployment_strategy": {
 					"canaries": 1,
 					"max_in_flight": 1,
@@ -429,6 +441,12 @@
 						"delete_instances": false
 					}
 				},
+				"properties": [
+					{
+						"name": "consul.servicename",
+						"value": "((application.name))"
+					}
+				],
 				"deployment_strategy": {
 					"canaries": 1,
 					"max_in_flight": 1,
