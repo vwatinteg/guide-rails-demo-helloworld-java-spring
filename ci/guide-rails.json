@@ -171,12 +171,6 @@
 						}
 					}
 				},
-				"properties": [
-					{
-						"name": "consul.servicename",
-						"value": "((application.name))-INT"
-					}
-				],
 				"deployment_strategy": {
 					"canaries": 1,
 					"max_in_flight": 1,
@@ -221,7 +215,12 @@
 							{
 								"name": "consul",
 								"release": "consul-warden-centos",
-								"properties": []
+								"properties": [
+									{
+										"name": "consul.servicename",
+										"value": "((application.name))-INT"
+									}
+								]
 							}
 						]
 					}
@@ -319,12 +318,6 @@
 						"delete_instances": false
 					}
 				},
-				"properties": [
-					{
-						"name": "consul.servicename",
-						"value": "((application.name))-REL"
-					}
-				],
 				"deployment_strategy": {
 					"canaries": 1,
 					"max_in_flight": 1,
@@ -369,7 +362,12 @@
 							{
 								"name": "consul",
 								"release": "consul-warden-centos",
-								"properties": []
+								"properties": [
+									{
+										"name": "consul.servicename",
+										"value": "((application.name))-REL"
+									}
+								]
 							}
 						]
 					}
@@ -441,12 +439,6 @@
 						"delete_instances": false
 					}
 				},
-				"properties": [
-					{
-						"name": "consul.servicename",
-						"value": "((application.name))"
-					}
-				],
 				"deployment_strategy": {
 					"canaries": 1,
 					"max_in_flight": 1,
@@ -491,7 +483,12 @@
 							{
 								"name": "consul",
 								"release": "consul-warden-centos",
-								"properties": []
+								"properties": [
+									{
+										"name": "consul.servicename",
+										"value": "((application.name))"
+									}
+								]
 							}
 						]
 					}
