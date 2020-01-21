@@ -219,6 +219,22 @@
 									{
 										"name": "consul.servicename",
 										"value": "((application.name))-INT"
+									},
+									{
+										"name": "calculi.intermediate.cert",
+										"value": "((server_cert))"
+									},
+									{
+										"name": "calculi.intermediate.key",
+										"value": "((server_key))"
+									},
+									{
+										"name": "consul.datacenter",
+										"value": "credit_suisse"
+									},
+									{
+										"name": "consul.environment",
+										"value": "DEV"
 									}
 								]
 							}
@@ -366,6 +382,22 @@
 									{
 										"name": "consul.servicename",
 										"value": "((application.name))-REL"
+									},
+									{
+										"name": "consul.environment",
+										"value": "DEV"
+									},
+									{
+										"name": "consul.datacenter",
+										"value": "credit_suisse"
+									},
+									{
+										"name": "calculi.intermediate.cert",
+										"value": "((server_cert))"
+									},
+									{
+										"name": "calculi.intermediate.key",
+										"value": "((server_key))"
 									}
 								]
 							}
@@ -487,6 +519,22 @@
 									{
 										"name": "consul.servicename",
 										"value": "((application.name))"
+									},
+									{
+										"name": "consul.environment",
+										"value": "PROD"
+									},
+									{
+										"name": "consul.datacenter",
+										"value": "credit_suisse"
+									},
+									{
+										"name": "calculi.intermediate.cert",
+										"value": "((server_cert))"
+									},
+									{
+										"name": "calculi.intermediate.key",
+										"value": "((server_key))"
 									}
 								]
 							}
