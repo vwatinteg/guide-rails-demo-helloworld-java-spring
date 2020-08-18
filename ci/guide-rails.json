@@ -610,16 +610,6 @@
 				"type": "string"
 			},
 			{
-				"name": "centos.release.build",
-				"value": "true",
-				"type": "boolean"
-			},
-			{
-				"name": "warden.centos.release.build",
-				"value": "false",
-				"type": "boolean"
-			},
-			{
 				"name": "jdk.version",
 				"value": "12",
 				"type": "string"
