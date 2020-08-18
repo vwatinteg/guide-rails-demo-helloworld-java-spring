@@ -196,13 +196,7 @@
 						"networks": [
 							"integration"
 						],
-						"deployment_strategy": {
-							"canaries": 1,
-							"max_in_flight": 1,
-							"canary_watch_time": "120000-240000",
-							"update_watch_time": "120000-240000",
-							"serial": false
-						},
+						"deployment_strategy": {},
 						"dependencies": [
 							{
 								"name": "consul",
@@ -647,7 +641,12 @@
 				"command": "bin/start-service.sh"
 			}
 		},
-		"releases": []
+		"releases": [
+			{
+				"name": "consul",
+				"version": "latest"
+			}
+		]
 	},
 	"organization": {
 		"orgname": "Tutorial"
