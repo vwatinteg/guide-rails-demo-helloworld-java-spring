@@ -1,10 +1,10 @@
 {
 	"metadata": {
-		"version": 1
+		"version": 2
 	},
 	"application": {
 		"name": "simple-hello-world-java",
-		"language": "JAVA",
+		"language": "JAVA_MAVEN",
 		"artifact_store": {
 			"type": "s3",
 			"repositories": [
@@ -28,32 +28,6 @@
 			{
 				"name": "Build",
 				"segment_type": "build",
-				"job_steps": [
-					{
-						"name": "build",
-						"definition": "build",
-						"command": "mvn compile\nls",
-						"properties": null
-					},
-					{
-						"name": "test",
-						"definition": "test",
-						"command": "mvn surefire-report:report \ncat ./target/surefire-reports/TEST-com.javacodegeeks.example.HelloWorldApplicationTests.xml \ncp ./target/surefire-reports/TEST-com.javacodegeeks.example.HelloWorldApplicationTests.xml ./test.xml\nmvn cobertura:cobertura  -Dcobertura.report.format=xml  -Dcobertura.aggregate=true install -e",
-						"properties": null
-					},
-					{
-						"name": "create jar",
-						"definition": "create jar",
-						"command": "mvn package",
-						"properties": null
-					},
-					{
-						"name": "list contents",
-						"definition": "list contents",
-						"command": "ls -R\n",
-						"properties": null
-					}
-				],
 				"exit_actions": {
 					"default": {
 						"fetch_logs": true,
@@ -78,33 +52,24 @@
 					"update_watch_time": "",
 					"serial": false
 				},
-				"application_init": {
-					"command": "",
-					"arguments": null
-				},
+				"application_init": {},
 				"packages": [
 					{
 						"name": "HelloWorld",
-						"dependencies": [],
 						"downloads": [],
 						"files": [
 							"target/HelloWorld*"
-						],
-						"package_install_command": "",
-						"installed_path": ""
+						]
 					},
 					{
 						"name": "jdk",
-						"dependencies": [],
 						"downloads": [
 							{
 								"link": "https://s3.amazonaws.com/calculi-middleware/jdk-((jdk.version))_linux-x64_bin.tar.gz",
 								"name": "jdk.tar.gz"
 							}
 						],
-						"files": [],
-						"package_install_command": "tar xzf jdk/jdk.tar.gz\ncp -Rf jdk-((jdk.version))/* ${BOSH_INSTALL_TARGET}",
-						"installed_path": ""
+						"package_install_command": "tar xzf jdk/jdk.tar.gz\ncp -Rf jdk-((jdk.version))/* ${BOSH_INSTALL_TARGET}"
 					}
 				],
 				"instance_tags": [
@@ -127,7 +92,38 @@
 						"UnhealthyThresholdCount": 0
 					}
 				},
-				"cache_info": {}
+				"cache_info": {},
+				"tasks": [
+					{
+						"name": "simple-hello-world-java",
+						"steps": [
+							{
+								"name": "build",
+								"definition": "build",
+								"command": "mvn compile\nls",
+								"properties": null
+							},
+							{
+								"name": "test",
+								"definition": "test",
+								"command": "mvn surefire-report:report \ncat ./target/surefire-reports/TEST-com.javacodegeeks.example.HelloWorldApplicationTests.xml \ncp ./target/surefire-reports/TEST-com.javacodegeeks.example.HelloWorldApplicationTests.xml ./test.xml\nmvn cobertura:cobertura  -Dcobertura.report.format=xml  -Dcobertura.aggregate=true install -e",
+								"properties": null
+							},
+							{
+								"name": "create jar",
+								"definition": "create jar",
+								"command": "mvn package",
+								"properties": null
+							},
+							{
+								"name": "list contents",
+								"definition": "list contents",
+								"command": "ls -R\n",
+								"properties": null
+							}
+						]
+					}
+				]
 			},
 			{
 				"name": "Integration",
@@ -147,26 +143,22 @@
 					"default": {
 						"fetch_logs": true,
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						},
 						"delete_instances": true
 					},
 					"on_success": {
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						}
 					},
 					"on_failure": {
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						}
 					},
 					"on_abort": {
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						}
 					}
@@ -178,10 +170,7 @@
 					"update_watch_time": "120000-240000",
 					"serial": false
 				},
-				"application_init": {
-					"command": "",
-					"arguments": null
-				},
+				"application_init": {},
 				"process": {
 					"init": {
 						"command": "bin/start-service.sh"
@@ -201,16 +190,19 @@
 					{
 						"name": "((application.name))",
 						"number_of_instances": 1,
-						"persistent_disk_type": "",
+						"cloud_provider_name": "guide-rails",
 						"vm_type": "default",
 						"os_type": "default",
 						"networks": [
-							"((deploy.target.network.integration))"
+							"integration"
 						],
-						"availability_zones": [
-							"((deploy.target.zone.integration))"
-						],
-						"deployment_strategy": {},
+						"deployment_strategy": {
+							"canaries": 1,
+							"max_in_flight": 1,
+							"canary_watch_time": "120000-240000",
+							"update_watch_time": "120000-240000",
+							"serial": false
+						},
 						"dependencies": [
 							{
 								"name": "consul",
@@ -296,14 +288,10 @@
 						"fetch_logs": true,
 						"notifications": [
 							{
-								"type": "slack",
-								"send_notification": false,
-								"to": null,
-								"message": ""
+								"type": "slack"
 							}
 						],
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						},
 						"delete_instances": false
@@ -311,14 +299,10 @@
 					"on_success": {
 						"notifications": [
 							{
-								"type": "slack",
-								"send_notification": false,
-								"to": null,
-								"message": ""
+								"type": "slack"
 							}
 						],
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						},
 						"delete_instances": false
@@ -326,14 +310,10 @@
 					"on_failure": {
 						"notifications": [
 							{
-								"type": "slack",
-								"send_notification": false,
-								"to": null,
-								"message": ""
+								"type": "slack"
 							}
 						],
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						},
 						"delete_instances": false
@@ -341,14 +321,10 @@
 					"on_abort": {
 						"notifications": [
 							{
-								"type": "slack",
-								"send_notification": false,
-								"to": null,
-								"message": ""
+								"type": "slack"
 							}
 						],
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						},
 						"delete_instances": false
@@ -361,10 +337,7 @@
 					"update_watch_time": "5000-30000",
 					"serial": false
 				},
-				"application_init": {
-					"command": "",
-					"arguments": null
-				},
+				"application_init": {},
 				"process": {
 					"init": {
 						"command": "bin/start-service.sh "
@@ -384,16 +357,19 @@
 					{
 						"name": "((application.name))",
 						"number_of_instances": 1,
-						"persistent_disk_type": "",
+						"cloud_provider_name": "guide-rails",
 						"vm_type": "default",
 						"os_type": "default",
 						"networks": [
-							"((deploy.target.network.release))"
+							"release"
 						],
-						"availability_zones": [
-							"((deploy.target.zone.release))"
-						],
-						"deployment_strategy": {},
+						"deployment_strategy": {
+							"canaries": 1,
+							"max_in_flight": 1,
+							"canary_watch_time": "5000-30000",
+							"update_watch_time": "5000-30000",
+							"serial": false
+						},
 						"dependencies": [
 							{
 								"name": "consul",
@@ -484,28 +460,24 @@
 					"default": {
 						"fetch_logs": true,
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						},
 						"delete_instances": false
 					},
 					"on_success": {
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						},
 						"delete_instances": false
 					},
 					"on_failure": {
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						},
 						"delete_instances": false
 					},
 					"on_abort": {
 						"code_analysis": {
-							"publish": false,
 							"properties": null
 						},
 						"delete_instances": false
@@ -518,10 +490,7 @@
 					"update_watch_time": "120000-240000",
 					"serial": false
 				},
-				"application_init": {
-					"command": "",
-					"arguments": null
-				},
+				"application_init": {},
 				"process": {
 					"init": {
 						"command": "bin/start-service.sh "
@@ -541,16 +510,19 @@
 					{
 						"name": "((application.name))",
 						"number_of_instances": 1,
-						"persistent_disk_type": "",
+						"cloud_provider_name": "guide-rails",
 						"vm_type": "default",
 						"os_type": "default",
 						"networks": [
-							"((deploy.target.network.production))"
+							"production"
 						],
-						"availability_zones": [
-							"((deploy.target.zone.production))"
-						],
-						"deployment_strategy": {},
+						"deployment_strategy": {
+							"canaries": 1,
+							"max_in_flight": 1,
+							"canary_watch_time": "120000-240000",
+							"update_watch_time": "120000-240000",
+							"serial": false
+						},
 						"dependencies": [
 							{
 								"name": "consul",
@@ -669,21 +641,13 @@
 				"target_path": "bin/integration-test.sh"
 			}
 		],
-		"application_init": {
-			"command": "",
-			"arguments": null
-		},
+		"application_init": {},
 		"process": {
 			"init": {
 				"command": "bin/start-service.sh"
 			}
 		},
-		"releases": [
-			{
-				"name": "consul-warden-centos",
-				"version": "latest"
-			}
-		]
+		"releases": []
 	},
 	"organization": {
 		"orgname": "Tutorial"
