@@ -120,6 +120,12 @@
 								"definition": "list contents",
 								"command": "ls -R\n",
 								"properties": null
+							},
+							{
+								"name": "print env",
+								"definition": "print env",
+								"command": "echo \"hello world\"",
+								"properties": null
 							}
 						]
 					}
