@@ -4,7 +4,7 @@
 	},
 	"application": {
 		"name": "simple-hello-world-java",
-		"language": "JAVA",
+		"language": "JAVA_MAVEN",
 		"artifact_store": {
 			"type": "s3",
 			"repositories": [
@@ -197,7 +197,11 @@
 						"name": "((application.name))",
 						"number_of_instances": 1,
 						"cloud_provider_name": "guide-rails",
+						"vm_type": "default",
 						"os_type": "default",
+						"networks": [
+							"integration"
+						],
 						"deployment_strategy": {
 							"canaries": 1,
 							"max_in_flight": 1,
@@ -360,7 +364,11 @@
 						"name": "((application.name))",
 						"number_of_instances": 1,
 						"cloud_provider_name": "guide-rails",
+						"vm_type": "default",
 						"os_type": "default",
+						"networks": [
+							"release"
+						],
 						"deployment_strategy": {
 							"canaries": 1,
 							"max_in_flight": 1,
@@ -509,7 +517,11 @@
 						"name": "((application.name))",
 						"number_of_instances": 1,
 						"cloud_provider_name": "guide-rails",
+						"vm_type": "default",
 						"os_type": "default",
+						"networks": [
+							"production"
+						],
 						"deployment_strategy": {
 							"canaries": 1,
 							"max_in_flight": 1,
