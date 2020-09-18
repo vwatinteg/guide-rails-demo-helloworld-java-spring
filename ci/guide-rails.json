@@ -4,7 +4,7 @@
 	},
 	"application": {
 		"name": "simple-hello-world-java",
-		"language": "JAVA",
+		"language": "JAVA_MAVEN",
 		"artifact_store": {
 			"type": "s3",
 			"repositories": [
@@ -100,7 +100,7 @@
 							{
 								"name": "build",
 								"definition": "build",
-								"command": "mvn compile\n",
+								"command": "mvn compile\n\n",
 								"properties": null
 							},
 							{
