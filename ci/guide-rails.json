@@ -196,15 +196,13 @@
 					{
 						"name": "((application.name))",
 						"number_of_instances": 1,
-						"cloud_provider_name": "guide-rails-gcp-us-west2",
+						"cloud_provider_name": "guide-rails-aws-us-west-2",
+						"vm_type": "default",
 						"os_type": "default",
-						"deployment_strategy": {
-							"canaries": 1,
-							"max_in_flight": 1,
-							"canary_watch_time": "120000-240000",
-							"update_watch_time": "120000-240000",
-							"serial": false
-						},
+						"networks": [
+							"integration"
+						],
+						"deployment_strategy": {},
 						"dependencies": [
 							{
 								"name": "consul",
@@ -359,15 +357,13 @@
 					{
 						"name": "((application.name))",
 						"number_of_instances": 1,
-						"cloud_provider_name": "guide-rails-gcp-us-west2",
+						"cloud_provider_name": "guide-rails-aws-us-west-2",
+						"vm_type": "default",
 						"os_type": "default",
-						"deployment_strategy": {
-							"canaries": 1,
-							"max_in_flight": 1,
-							"canary_watch_time": "5000-30000",
-							"update_watch_time": "5000-30000",
-							"serial": false
-						},
+						"networks": [
+							"release"
+						],
+						"deployment_strategy": {},
 						"dependencies": [
 							{
 								"name": "consul",
@@ -508,15 +504,13 @@
 					{
 						"name": "((application.name))",
 						"number_of_instances": 1,
-						"cloud_provider_name": "guide-rails-gcp-us-west2",
+						"cloud_provider_name": "guide-rails-aws-us-west-2",
+						"vm_type": "default",
 						"os_type": "default",
-						"deployment_strategy": {
-							"canaries": 1,
-							"max_in_flight": 1,
-							"canary_watch_time": "120000-240000",
-							"update_watch_time": "120000-240000",
-							"serial": false
-						},
+						"networks": [
+							"production"
+						],
+						"deployment_strategy": {},
 						"dependencies": [
 							{
 								"name": "consul",
