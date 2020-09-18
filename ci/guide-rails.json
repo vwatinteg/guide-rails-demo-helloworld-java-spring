@@ -100,7 +100,7 @@
 							{
 								"name": "build",
 								"definition": "build",
-								"command": "mvn compile\n",
+								"command": "mvn compile\nls\n",
 								"properties": null
 							},
 							{
@@ -196,18 +196,13 @@
 					{
 						"name": "((application.name))",
 						"number_of_instances": 1,
-						"cloud_provider_name": "guide-rails-gcp-us-east1",
+						"cloud_provider_name": "guide-rails-gcp-us-west2",
+						"vm_type": "default",
 						"os_type": "default",
 						"networks": [
 							"integration"
 						],
-						"deployment_strategy": {
-							"canaries": 1,
-							"max_in_flight": 1,
-							"canary_watch_time": "120000-240000",
-							"update_watch_time": "120000-240000",
-							"serial": false
-						},
+						"deployment_strategy": {},
 						"dependencies": [
 							{
 								"name": "consul",
@@ -362,18 +357,13 @@
 					{
 						"name": "((application.name))",
 						"number_of_instances": 1,
-						"cloud_provider_name": "guide-rails-gcp-us-east1",
+						"cloud_provider_name": "guide-rails-gcp-us-west2",
+						"vm_type": "default",
 						"os_type": "default",
-						"network": [
+						"networks": [
 							"release"
 						],
-						"deployment_strategy": {
-							"canaries": 1,
-							"max_in_flight": 1,
-							"canary_watch_time": "5000-30000",
-							"update_watch_time": "5000-30000",
-							"serial": false
-						},
+						"deployment_strategy": {},
 						"dependencies": [
 							{
 								"name": "consul",
@@ -514,18 +504,13 @@
 					{
 						"name": "((application.name))",
 						"number_of_instances": 1,
-						"cloud_provider_name": "guide-rails-gcp-us-east1",
+						"cloud_provider_name": "guide-rails-gcp-us-west2",
+						"vm_type": "default",
 						"os_type": "default",
 						"networks": [
 							"production"
 						],
-						"deployment_strategy": {
-							"canaries": 1,
-							"max_in_flight": 1,
-							"canary_watch_time": "120000-240000",
-							"update_watch_time": "120000-240000",
-							"serial": false
-						},
+						"deployment_strategy": {},
 						"dependencies": [
 							{
 								"name": "consul",
